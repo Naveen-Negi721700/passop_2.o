@@ -33,27 +33,27 @@ const Manager = () => {
 
     const showpassword = () => {
         passwordRef.current.type = "text"
-        if (ref.current.src.includes("/icons/eyecross.png")) {
-            ref.current.src = "/icons/eye.png"
+        if (ref.current.src.includes("/passop_2.o/icons/eyecross.png")) {
+            ref.current.src = "/passop_2.o/icons/eye.png"
             passwordRef.current.type = "password"
 
         }
         else {
             passwordRef.current.type = "text"
-            ref.current.src = "/icons/eyecross.png"
+            ref.current.src = "/passop_2.o/icons/eyecross.png"
 
         }
     }
     const savePassword = () => {
-       if (
-  form.site[0]?.length > 3 &&
-  form.username[0]?.length > 3 &&
-  form.password[0]?.length > 3
-){
+        if (
+            form.site.length > 3 &&
+            form.username.length > 3 &&
+            form.password.length > 3
+        ) {
             setpasswordArray([...passwordArray, { ...form, id: uuidv4() }])
             localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
             setform({ site: "", username: "", password: "" })
-           
+
             toast('🦄 Password Save Successfully!', {
                 position: "top-right",
                 autoClose: 5000,
@@ -72,7 +72,7 @@ const Manager = () => {
 
     }
     const deletePassword = (id) => {
-        
+
         let c = confirm("Do you really want to delete this password ?")
         if (c) {
             setpasswordArray(passwordArray.filter(item => item.id !== id))
@@ -88,20 +88,20 @@ const Manager = () => {
                 theme: "light",
 
             });
-        
+
         }
     }
 
     const editPassword = (id) => {
-  
+
         setform(passwordArray.filter(i => i.id === id)[0])
         setpasswordArray(passwordArray.filter(item => item.id !== id))
-     
+
 
     }
 
     const handleChange = (e) => {
-        setform({ ...form, [e.target.name]: [e.target.value] })
+        setform({ ...form, [e.target.name]: e.target.value })
     }
     return (
         <>
@@ -134,7 +134,8 @@ const Manager = () => {
                         <div className="relative">
                             <input ref={passwordRef} value={form.password} onChange={handleChange} placeholder='Enter Password' className='border border-green-500 w-full rounded-full  py-1 px-1' type="password" name='password' id='password' />
                             <span className='absolute right-1 top-1.5  cursor-pointer' onClick={showpassword}>
-                                <img ref={ref} className='p-1 ' width={26} src="/icons/eye.png" alt="eye" />
+                                <img ref={ref} className='p-1 ' width={26} src="/passop_2.o/icons/eye.png" alt="eye" />
+                                
                             </span>
                         </div>
                     </div>
@@ -144,7 +145,8 @@ const Manager = () => {
                             src="https://cdn.lordicon.com/jgnvfzqg.json"
                             trigger="hover">
                         </lord-icon>
-                        Save password</button>
+                        Save password
+                    </button>
                 </div>
                 <div className="passwords">
                     <h2 className='font-bold text-2xl py-4'>your passwords</h2>
